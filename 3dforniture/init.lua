@@ -1,18 +1,39 @@
 --[[
---Mod:			3D FORNITURE
---V: 1.0
---Autor:		Tonyka
---Agradecimientos a:	cosarara97, InfinityProject
-------------------------
--- Copyright  GNU GPL --
-------------------------
---]]
+   3D Forniture
+   
+   Copyright 2012 Tonyka
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+   
+   Contributors:
+
+    InfinityProject
+
+        suggested creating bathroom kit.
+
+    cosarara97
+
+        code.
+   
+]]--
 
 dofile(minetest.get_modpath("3dforniture").."/crafting.lua")
 dofile(minetest.get_modpath("3dforniture").."/nodes.lua")
 
 --alias
-minetest.register_alias("mapgen_tree", "default:tree")
 minetest.register_alias('table', '3dforniture:table')
 minetest.register_alias('chair', '3dforniture:chair')
 minetest.register_alias('bars', '3dforniture:bars')
@@ -24,52 +45,43 @@ minetest.register_alias('sink', '3dforniture:sink')
 minetest.register_alias('taps', '3dforniture:taps')
 minetest.register_alias('shower_tray', '3dforniture:shower_tray')
 minetest.register_alias('shower_head', '3dforniture:shower_head')
---[[
-minetest.register_abm(
-	{nodenames = {"3dforniture:toilet"},
-	interval = 0.02 ,
-	chance = 1,
-	action = function(pos)
-		--pos.y=pos.y
-		minetest.env:add_node(pos, {name="3dforniture:toilet_open"})
-		--minetest.env:remove_node(pos, {name="3dforniture:toilet_open"})
-	end,
-})
+minetest.register_alias('table_lamp', '3dforniture:table_lamp_off')
+minetest.register_alias('armchair', '3dforniture:armchair')
 
-minetest.register_abm(
-	{nodenames = {"3dforniture:toilet_open"},
-	interval = 0.02,
-	chance = 1,
-	action = function(pos)
-		--pos.y=pos.y
-		minetest.env:add_node(pos, {name="3dforniture:toilet"})
-	end,
-})
-]]
---[[
-minetest.register_abm(
-	{nodenames = {"default:tree"},
-	interval = 1 ,
-	chance = 1,
-	action = function(pos)
-		--pos.y=pos.y
-		minetest.env:add_node(pos, {name="default:tree"})
-		--minetest.env:remove_node(pos, {name="3dforniture:toilet_open"})
-	end,
-})
-]]
+--function
 
---[[
-local on_toilet_puncher = function (pos, node, puncher)
-	if node.name == '3dforniture:toilet' then
-		minetest.env:add_node(pos, {name="3dforniture:toilet_open"})
+local on_lamp_puncher = function (pos, node, puncher)
+	if node.name == "3dforniture:table_lamp_off" then
+		minetest.env:add_node(pos, {name="3dforniture:table_lamp_low"})
 		nodeupdate(pos)
-	elseif node.name == '3dforniture:toilet_open' then
-		minetest.env:add_node(pos, {name="3dforniture:toilet"})
+	elseif node.name == "3dforniture:table_lamp_low" then
+		minetest.env:add_node(pos, {name="3dforniture:table_lamp_med"})
+		nodeupdate(pos)
+	elseif node.name == "3dforniture:table_lamp_med" then
+		minetest.env:add_node(pos, {name="3dforniture:table_lamp_hi"})
+		nodeupdate(pos)
+	elseif node.name == "3dforniture:table_lamp_hi" then
+		minetest.env:add_node(pos, {name="3dforniture:table_lamp_max"})
+		nodeupdate(pos)
+	elseif node.name == "3dforniture:table_lamp_max" then
+		minetest.env:add_node(pos, {name="3dforniture:table_lamp_off"})
 		nodeupdate(pos)
     end
 end
 
+minetest.register_on_punchnode(on_lamp_puncher)
+
+local on_toilet_puncher = function (pos, node, puncher)
+  if node.name == '3dforniture:toilet' then
+    local dir = node["param2"]
+    minetest.env:add_node(pos, {name="3dforniture:toilet_open", param2=dir, paramtype2='none'})
+    nodeupdate(pos)
+  elseif node.name == '3dforniture:toilet_open' then
+    local dir = node["param2"]
+    minetest.env:add_node(pos, {name="3dforniture:toilet", param2=dir, paramtype2='none'})
+    nodeupdate(pos)
+  end
+end
+
 minetest.register_on_punchnode(on_toilet_puncher)
-]]--
-----------------------------------------------------------------
+
