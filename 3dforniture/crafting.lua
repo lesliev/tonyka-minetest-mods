@@ -1,11 +1,46 @@
+--[[
+   3D Forniture
+   
+   Copyright 2012 Tonyka
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+   
+   Contributors:
+
+    InfinityProject
+
+        suggested creating bathroom kit.
+
+    cosarara97
+
+        code.
+   
+]]--
+
+
+--mesa
 minetest.register_craft( {
-	output = '3dforniture:table',
+	output = '3dforniture:table', '3dforniture:chair 2',
 	recipe = {
 		{ 'default:wood','default:wood', 'default:wood' },
 		{ 'default:stick', '', 'default:stick' },
 	},
 })
 
+--silla
 minetest.register_craft( {
 	output = '3dforniture:chair 2',
 	recipe = {
@@ -15,6 +50,17 @@ minetest.register_craft( {
 	},
 })
 
+--sillón
+minetest.register_craft( {
+	output = '3dforniture:armchair 2',
+	recipe = {
+		{ 'default:wood',''},
+		{ 'default:wood','default:wood' },
+		{ 'default:wood','default:wood' },
+	},
+})
+
+--barrotes
 minetest.register_craft( {
 	output = '3dforniture:bars 10',
 	recipe = {
@@ -23,6 +69,7 @@ minetest.register_craft( {
 	},
 })
 
+-- union en L de barrotes
 minetest.register_craft( {
 	output = '3dforniture:L_binding_bars 4',
 	recipe = {
@@ -31,6 +78,7 @@ minetest.register_craft( {
 	},
 })
 
+--cadenas
 minetest.register_craft( {
 	output = '3dforniture:chains 4',
 	recipe = {
@@ -40,6 +88,7 @@ minetest.register_craft( {
 	},
 })
 
+--antorcha de pared
 minetest.register_craft( {
 	output = '3dforniture:torch_wall 10',
 	recipe = {
@@ -48,6 +97,7 @@ minetest.register_craft( {
 	},
 })
 
+--retrete
 minetest.register_craft( {
 	output = '3dforniture:toilet',
 	recipe = {
@@ -57,7 +107,7 @@ minetest.register_craft( {
 	},
 })
 
-
+--lavabo
 minetest.register_craft( {
 	output = '3dforniture:sink',
 	recipe = {
@@ -65,6 +115,7 @@ minetest.register_craft( {
 	},
 })
 
+--grifos
 minetest.register_craft( {
 	output = '3dforniture:taps',
 	recipe = {
@@ -72,6 +123,7 @@ minetest.register_craft( {
 	},
 })
 
+--plato de ducha
 minetest.register_craft( {
 	output = '3dforniture:shower_tray',
 	recipe = {
@@ -79,26 +131,36 @@ minetest.register_craft( {
 	},
 })
 
+--alcachofa de ducha
 minetest.register_craft( {
 	output = '3dforniture:shower_head',
 	recipe = {
-		{ 'default:steel_ingot','bucket:bucket_water' },
+		{'default:steel_ingot', 'bucket:bucket_water'},
+	},
+})
+
+--lampara de mesa
+minetest.register_craft( {
+	output = '3dforniture:table_lamp_off',
+	recipe = {
+		{'default:paper','default:torch' ,'default:paper'},
+		{'','default:stick',''},
+		{'','stairs:slab_wood',''},
 	},
 })
 
 --fuel
 
+--mesa
 minetest.register_craft({
 	type = 'fuel',
 	recipe = '3dforniture:table',
 	burntime = 30,
 })
 
+--silla
 minetest.register_craft({
 	type = 'fuel',
 	recipe = '3dforniture:chair',
 	burntime = 15,
 })
-
-
-
